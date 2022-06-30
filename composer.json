@@ -1,0 +1,24 @@
+{
+    "name": "azzahraghania/mlongo-library",
+    "description": "Boilerplate package for creating other packages.",
+    "keywords": ["template", "composer", "package"],
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "AzzahraGhania",
+            "email": "AzzahraGhania89@gmail.com"
+        }
+    ],
+    "type": "project",
+    "require": {
+		"php": ">=7.1"
+    },
+    "require-dev": {
+		"mongodb/mongodb": "^1.12"
+    },
+    "autoload": {
+        "psr-4": {
+            "AzzahraGhania\\Library\\": "src/"
+        }
+    }
+}
