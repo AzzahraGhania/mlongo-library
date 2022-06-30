@@ -64,7 +64,7 @@ Class Mongo_db{
     {
         if ( ! class_exists('MongoDB\Driver\Manager'))
         {
-            show_error("The MongoDB PECL extension has not been installed or enabled");
+            $this->show_error("The MongoDB PECL extension has not been installed or enabled");
         }
         $config = CONFIG;
         $this->config = $config['mongo_db'];
@@ -105,13 +105,13 @@ Class Mongo_db{
             $this->activate = $this->config['active'];
         }else
         {
-            show_error("MongoDB configuration is missing.");
+            $this->show_error("MongoDB configuration is missing.");
         }
         if(isset($this->config[$this->activate]) == TRUE)
         {
             if(empty($this->config[$this->activate]['hostname']))
             {
-                show_error("Hostname missing from mongodb config group : {$this->activate}");
+                $this->show_error("Hostname missing from mongodb config group : {$this->activate}");
             }
             else
             {
@@ -119,7 +119,7 @@ Class Mongo_db{
             }
             if(empty($this->config[$this->activate]['port']))
             {
-                show_error("Port number missing from mongodb config group : {$this->activate}");
+                $this->show_error("Port number missing from mongodb config group : {$this->activate}");
             }
             else
             {
@@ -128,7 +128,7 @@ Class Mongo_db{
             if(isset($this->config[$this->activate]['no_auth']) == FALSE
                && empty($this->config[$this->activate]['username']))
             {
-                show_error("Username missing from mongodb config group : {$this->activate}");
+                $this->show_error("Username missing from mongodb config group : {$this->activate}");
             }
             else
             {
@@ -137,7 +137,7 @@ Class Mongo_db{
             if(isset($this->config[$this->activate]['no_auth']) == FALSE 
                && empty($this->config[$this->activate]['password']))
             {
-                show_error("Password missing from mongodb config group : {$this->activate}");
+                $this->show_error("Password missing from mongodb config group : {$this->activate}");
             }
             else
             {
@@ -145,7 +145,7 @@ Class Mongo_db{
             }
             if(empty($this->config[$this->activate]['database']))
             {
-                show_error("Database name missing from mongodb config group : {$this->activate}");
+                $this->show_error("Database name missing from mongodb config group : {$this->activate}");
             }
             else
             {
@@ -196,7 +196,7 @@ Class Mongo_db{
         }
         else
         {
-            show_error("mongodb config group :  <strong>{$this->activate}</strong> does not exist.");
+            $this->show_error("mongodb config group :  <strong>{$this->activate}</strong> does not exist.");
         }
     }
     /**
@@ -209,7 +209,7 @@ Class Mongo_db{
     {
         if(!in_array($value, ['array', 'object']))
         {
-            show_error("Invalid Return As Type");
+            $this->show_error("Invalid Return As Type");
         }
         $this->return_as = $value;
     }
@@ -242,11 +242,11 @@ Class Mongo_db{
         {
             if(isset($this->debug) == TRUE && $this->debug == TRUE)
             {
-                show_error("Unable to connect to MongoDB: {$e->getMessage()}");
+                $this->show_error("Unable to connect to MongoDB: {$e->getMessage()}");
             }
             else
             {
-                show_error("Unable to connect to MongoDB");
+                $this->show_error("Unable to connect to MongoDB");
             }
         }
     }
@@ -669,7 +669,7 @@ Class Mongo_db{
         }
         else
         {
-            show_error("Where value should be an array.");
+            $this->show_error("Where value should be an array.");
         }
     }
     /**
@@ -697,7 +697,7 @@ Class Mongo_db{
         }
         else
         {
-            show_error("Where value should be an array.");
+            $this->show_error("Where value should be an array.");
         }
     }
 
@@ -716,7 +716,7 @@ Class Mongo_db{
     {
         if (empty($field))
         {
-            show_error("Mongo field is require to perform where in query.");
+            $this->show_error("Mongo field is require to perform where in query.");
         }
         if (is_array($in) && count($in) > 0)
         {
@@ -726,7 +726,7 @@ Class Mongo_db{
         }
         else
         {
-            show_error("in value should be an array.");
+            $this->show_error("in value should be an array.");
         }
     }
     /**
@@ -862,5 +862,10 @@ Class Mongo_db{
         {
             $this->wheres[ $param ] = array();
         }
+    }
+
+    public function show_error($string){
+      echo $string;
+
     }
 }

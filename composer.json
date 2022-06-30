@@ -13,9 +13,6 @@
     "require": {
 		"php": ">=7.1"
     },
-    "require-dev": {
-		"mongodb/mongodb": "^1.12"
-    },
     "autoload": {
         "psr-4": {
             "AzzahraGhania\\Library\\": "src/"
